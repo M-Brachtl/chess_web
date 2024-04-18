@@ -1,0 +1,55 @@
+.chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 400px;
+    height: 400px;
+    border: 3px solid black;
+    padding: 1px;
+    /* invert the content upside down, but the sides have to remain in the same columns */
+    transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.chessboard .a:nth-child(odd),
+.chessboard .b:nth-child(even),
+.chessboard .c:nth-child(odd),
+.chessboard .d:nth-child(even),
+.chessboard .e:nth-child(odd),
+.chessboard .f:nth-child(even),
+.chessboard .g:nth-child(odd),
+.chessboard .h:nth-child(even) {
+    background-color: grey;
+}
+
+.chessboard .a:nth-child(even),
+.chessboard .b:nth-child(odd),
+.chessboard .c:nth-child(even),
+.chessboard .d:nth-child(odd),
+.chessboard .e:nth-child(even),
+.chessboard .f:nth-child(odd),
+.chessboard .g:nth-child(even),
+.chessboard .h:nth-child(odd) {
+    background-color: whitesmoke;
+}
+
+
+.chessboard div {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+}
+
+.chessboard div:hover {
+    opacity: 0.5;
+}
+.chessboard div.a:hover {
+    opacity: 0.5;
+}
+
+img {
+    width: 100%;
+}
+
+img[src="https://upload.wikimedia.org/wikipedia/commons/4/43/Chess_Ndt45.svg"], img[src="https://upload.wikimedia.org/wikipedia/commons/1/17/Chess_Nlt45.svg"] {
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
