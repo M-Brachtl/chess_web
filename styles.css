@@ -9,27 +9,19 @@
     /* invert the content upside down, but the sides have to remain in the same columns */
     transform: matrix(1, 0, 0, -1, 0, 0);
 }
-
-.chessboard .a:nth-child(odd),
-.chessboard .b:nth-child(even),
-.chessboard .c:nth-child(odd),
-.chessboard .d:nth-child(even),
-.chessboard .e:nth-child(odd),
-.chessboard .f:nth-child(even),
-.chessboard .g:nth-child(odd),
-.chessboard .h:nth-child(even) {
-    background-color: grey;
+.chessboard div{
+    background-color: #e8e8e8;
 }
 
-.chessboard .a:nth-child(even),
-.chessboard .b:nth-child(odd),
-.chessboard .c:nth-child(even),
-.chessboard .d:nth-child(odd),
-.chessboard .e:nth-child(even),
-.chessboard .f:nth-child(odd),
-.chessboard .g:nth-child(even),
-.chessboard .h:nth-child(odd) {
-    background-color: whitesmoke;
+.chessboard .\031.a, .\033.a, .\035.a, .\037.a,
+.chessboard .\031.c, .\033.c, .\035.c, .\037.c,
+.chessboard .\031.e, .\033.e, .\035.e, .\037.e,
+.chessboard .\031.g, .\033.g, .\035.g, .\037.g,
+.chessboard .\030.b, .\032.b, .\034.b, .\036.b, .\038.b,
+.chessboard .\030.d, .\032.d, .\034.d, .\036.d, .\038.d,
+.chessboard .\030.f, .\032.f, .\034.f, .\036.f, .\038.f,
+.chessboard .\030.h, .\032.h, .\034.h, .\036.h {
+    background-color: grey;
 }
 
 
