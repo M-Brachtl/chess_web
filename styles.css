@@ -20,7 +20,7 @@
 .chessboard .\030.b, .\032.b, .\034.b, .\036.b, .\038.b,
 .chessboard .\030.d, .\032.d, .\034.d, .\036.d, .\038.d,
 .chessboard .\030.f, .\032.f, .\034.f, .\036.f, .\038.f,
-.chessboard .\030.h, .\032.h, .\034.h, .\036.h {
+.chessboard .\030.h, .\032.h, .\034.h, .\036.h, .\038.h {
     background-color: grey;
 }
 
