@@ -4,85 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Šachy</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chess.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="chessboard">
-        <div class="1 a"></div>
-        <div class="1 b"></div>
-        <div class="1 c"></div>
-        <div class="1 d"></div>
-        <div class="1 e"></div>
-        <div class="1 f"></div>
-        <div class="1 g"></div>
-        <div class="1 h"></div>
+    <header>
+        <span>Šachy</span>
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.38 122.88"><defs><style>.cls-1{fill-rule:evenodd;}</style></defs><title>chess-pawn</title><path class="cls-1" d="M35.73,32.57a20.45,20.45,0,1,1,32.91,0Zm35.06,3.88a7.1,7.1,0,0,1,6.17,7h0a7.11,7.11,0,0,1-6.61,7.06H34a7.1,7.1,0,0,1-6.6-7.06h0a7.1,7.1,0,0,1,6.17-7ZM63.33,54.4c.91,14.57,6,26.07,18.75,31.85V91.6H22.3V86.25c12-3.8,17.68-15,18.73-31.85ZM82.39,95.45a14.39,14.39,0,0,1,12.67,14.23v.22H9.32v-.22A14.39,14.39,0,0,1,22,95.45l.31,0H82.08l.31,0ZM94.9,113.77a12,12,0,0,1,9.48,9.11H0a12,12,0,0,1,9.47-9.11Z"/></svg>
+        <div id="heading-buttons">
+            <button id="home" class="selected">Domů</button>
+            <button id="game">Hrát</button>
+            <button id="howto">Jak hrát?</button>
+        </div>
+    </header>
+    <main id="page1">
+        <section class="game">
+            <div class="chessboard">
+                <div class="1 a"></div>
+                <div class="1 b"></div>
+                <div class="1 c"></div>
+                <div class="1 d"></div>
+                <div class="1 e"></div>
+                <div class="1 f"></div>
+                <div class="1 g"></div>
+                <div class="1 h"></div>
 
-        <div class="2 a"></div>
-        <div class="2 b"></div>
-        <div class="2 c"></div>
-        <div class="2 d"></div>
-        <div class="2 e"></div>
-        <div class="2 f"></div>
-        <div class="2 g"></div>
-        <div class="2 h"></div>
+                <div class="2 a"></div>
+                <div class="2 b"></div>
+                <div class="2 c"></div>
+                <div class="2 d"></div>
+                <div class="2 e"></div>
+                <div class="2 f"></div>
+                <div class="2 g"></div>
+                <div class="2 h"></div>
 
-        <div class="3 a"></div>
-        <div class="3 b"></div>
-        <div class="3 c"></div>
-        <div class="3 d"></div>
-        <div class="3 e"></div>
-        <div class="3 f"></div>
-        <div class="3 g"></div>
-        <div class="3 h"></div>
+                <div class="3 a"></div>
+                <div class="3 b"></div>
+                <div class="3 c"></div>
+                <div class="3 d"></div>
+                <div class="3 e"></div>
+                <div class="3 f"></div>
+                <div class="3 g"></div>
+                <div class="3 h"></div>
 
-        <div class="4 a"></div>
-        <div class="4 b"></div>
-        <div class="4 c"></div>
-        <div class="4 d"></div>
-        <div class="4 e"></div>
-        <div class="4 f"></div>
-        <div class="4 g"></div>
-        <div class="4 h"></div>
+                <div class="4 a"></div>
+                <div class="4 b"></div>
+                <div class="4 c"></div>
+                <div class="4 d"></div>
+                <div class="4 e"></div>
+                <div class="4 f"></div>
+                <div class="4 g"></div>
+                <div class="4 h"></div>
 
-        <div class="5 a"></div>
-        <div class="5 b"></div>
-        <div class="5 c"></div>
-        <div class="5 d"></div>
-        <div class="5 e"></div>
-        <div class="5 f"></div>
-        <div class="5 g"></div>
-        <div class="5 h"></div>
+                <div class="5 a"></div>
+                <div class="5 b"></div>
+                <div class="5 c"></div>
+                <div class="5 d"></div>
+                <div class="5 e"></div>
+                <div class="5 f"></div>
+                <div class="5 g"></div>
+                <div class="5 h"></div>
 
-        <div class="6 a"></div>
-        <div class="6 b"></div>
-        <div class="6 c"></div>
-        <div class="6 d"></div>
-        <div class="6 e"></div>
-        <div class="6 f"></div>
-        <div class="6 g"></div>
-        <div class="6 h"></div>
+                <div class="6 a"></div>
+                <div class="6 b"></div>
+                <div class="6 c"></div>
+                <div class="6 d"></div>
+                <div class="6 e"></div>
+                <div class="6 f"></div>
+                <div class="6 g"></div>
+                <div class="6 h"></div>
 
-        <div class="7 a"></div>
-        <div class="7 b"></div>
-        <div class="7 c"></div>
-        <div class="7 d"></div>
-        <div class="7 e"></div>
-        <div class="7 f"></div>
-        <div class="7 g"></div>
-        <div class="7 h"></div>
+                <div class="7 a"></div>
+                <div class="7 b"></div>
+                <div class="7 c"></div>
+                <div class="7 d"></div>
+                <div class="7 e"></div>
+                <div class="7 f"></div>
+                <div class="7 g"></div>
+                <div class="7 h"></div>
 
-        <div class="8 a"></div>
-        <div class="8 b"></div>
-        <div class="8 c"></div>
-        <div class="8 d"></div>
-        <div class="8 e"></div>
-        <div class="8 f"></div>
-        <div class="8 g"></div>
-        <div class="8 h"></div>
-    </div>
-    <p id="protocol-line"></p>
+                <div class="8 a"></div>
+                <div class="8 b"></div>
+                <div class="8 c"></div>
+                <div class="8 d"></div>
+                <div class="8 e"></div>
+                <div class="8 f"></div>
+                <div class="8 g"></div>
+                <div class="8 h"></div>
+            </div>
+            <p id="protocol-line">This is a protocol line, please do not delete me.</p>
+        </section>
+    </main>
+    <main id="page2" style="display: none;"></main>
+    <main id="page3" style="display: none;"></main>
     <!-- <button id="invert">Invert the chessboard!</button> -->
 
+    <script src="chessboard.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
