@@ -1908,6 +1908,7 @@ exports.Chess = Chess;
 },{}],2:[function(require,module,exports){
 const Chess = require("chess.js").Chess;
 
+let player = "white"; // I'm looking forward to make the black's part of the game. /s
 const chess = new Chess();
 const protocol = document.getElementById("protocol-line")
 let gameover = false;
@@ -1995,15 +1996,21 @@ startPosition();
 function movePiece(move) {
     // communication with the server
     let pawnMove = false
-    if (!gameover) {
+    if (!gameover && move !== "O-O" && move !== "O-O-O") {
         /// remember to remove P from the move
         if (move[0][0] == "P") {
-            move[0] = move[0].slice(1)
-            pawnMove = true
+            if (move[1][1] == "8" || move[1][1] == "1") {
+                move[0] = move[0].slice(1)
+                pawnMove = true
+                move[1] += '='+prompt("Promote to: (Q, R, B, N)").toUpperCase()
+            }else{
+                move[0] = move[0].slice(1)
+                pawnMove = true
+            }
         }
         try {
             protocol.textContent = ""
-            chess.move(move[0] + move[1]);
+            const moveInfo = chess.move(move[0] + move[1], verbose = true);
             if (chess.isCheckmate()) {
                 protocol.textContent = `Checkmate! ${{ b: "White", w: "Black" }[chess.turn()]} won!`
                 gameover = true;
@@ -2015,16 +2022,66 @@ function movePiece(move) {
                 move[0] = "P" + move[0]
             }
             // piece moving
-            console.log('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]);
+            //console.log('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]);
 
             const piece = document.querySelector('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]).innerHTML;
             document.querySelector('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]).innerHTML = "";
             document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = piece;
+            protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+            if (move[1][1] == "8" || move[1][1] == "1" && pawnMove) {
+                switch (move[1][0]) {
+                    default: // case Q
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${queen[move[1][0]]}" alt="Q">`
+                        break;
+                    case "R":
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${rook[move[1][0]]}" alt="R">`
+                        break;
+                    case "B":
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${bishop[move[1][0]]}" alt="B">`
+                        break;
+                    case "N":
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${knight[move[1][0]]}" alt="N">`
+                        break;
+                }
+            } else if (pawnMove && moveInfo.flags === "e") {
+                console.log('[class^="' + (parseInt(move[1][1])+1) + '"].')
+                if (chess.turn() == "w") { // white is about to move => black just did the en passant
+                    document.querySelector('[class^="' + (parseInt(move[1][1])+1) + '"].' + move[1][0]).innerHTML = "";
+                } else {
+                    document.querySelector('[class^="' + (parseInt(move[1][1])-1) + '"].' + move[1][0]).innerHTML = "";
+                }
+            }
         }
         catch (error) {
             protocol.textContent = error.message;
         }
-    }
+    }else if (!gameover && (move === "O-O" || move === "O-O-O")) {
+        try {
+            chess.move(move);
+            if (chess.isCheckmate()) {
+                protocol.textContent = `Checkmate! ${{ b: "White", w: "Black" }[chess.turn()]} won!`
+                gameover = true;
+            } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
+                protocol.textContent = "Stalemate!"
+                gameover = true
+            }
+            protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+            document.querySelector("[class^='1'].e").innerHTML = "";
+            if (move === "O-O") {
+                document.querySelector("[class^='1'].h").innerHTML = "";
+                document.querySelector("[class^='1'].g").innerHTML = `<img src="${king.white}" alt="K">`;
+                document.querySelector("[class^='1'].f").innerHTML = `<img src="${rook.white}" alt="R">`;
+            } else {
+                document.querySelector("[class^='1'].a").innerHTML = "";
+                document.querySelector("[class^='1'].c").innerHTML = `<img src="${king.white}" alt="K">`;
+                document.querySelector("[class^='1'].d").innerHTML = `<img src="${rook.white}" alt="R">`;
+            }
+        }
+        catch (error) {
+            protocol.textContent = error.message;
+        }
+    
+    };
 }
 
 function fromClick(field) {
@@ -2059,6 +2116,12 @@ function toClick(field) {
 fields.forEach(function (field) {
     field.addEventListener('click', function () {
         fromClick(field);
+    });
+});
+
+document.querySelectorAll(".castle").forEach(function (castle) {
+    castle.addEventListener('click', function () {
+        movePiece(castle.innerHTML);
     });
 });
 
