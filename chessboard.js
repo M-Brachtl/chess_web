@@ -1996,6 +1996,14 @@ startPosition();
 function movePiece(move) {
     // communication with the server
     let pawnMove = false
+    if (JSON.stringify(move) == JSON.stringify(['Ke1','g1'])) {
+        console.log('Small castling')
+        move = 'O-O'
+    }else if (JSON.stringify(move) == JSON.stringify(['Ke1','c1'])  ) {
+        console.log('Big castling')
+        move = 'O-O-O'
+    }
+    console.log('Move: '+ move)
     if (!gameover && move !== "O-O" && move !== "O-O-O") {
         /// remember to remove P from the move
         if (move[0][0] == "P") {
@@ -2080,8 +2088,8 @@ function movePiece(move) {
         catch (error) {
             protocol.textContent = error.message;
         }
-    
     };
+    console.log(chess.ascii())
 }
 
 function fromClick(field) {
