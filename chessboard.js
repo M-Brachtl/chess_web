@@ -1917,27 +1917,27 @@ const fields = document.querySelectorAll(".chessboard div");
 let pieceClicked = false;
 let move = [null, null];
 
-king = {
+const king = {
     black: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Chess_fdt45.svg",
     white: "https://upload.wikimedia.org/wikipedia/commons/1/17/Chess_flt45.svg"
 }
-queen = {
+const queen = {
     black: "https://upload.wikimedia.org/wikipedia/commons/3/31/Chess_gdt45.svg",
     white: "https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_glt45.svg"
 }
-rook = {
+const rook = {
     black: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Chess_mdt45.svg",
     white: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Chess_mlt45.svg"
 }
-bishop = {
+const bishop = {
     black: "https://upload.wikimedia.org/wikipedia/commons/5/5a/Chess_Bdt45.svg",
     white: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Chess_Blt45.svg"
 }
-knight = {
+const knight = {
     black: "https://upload.wikimedia.org/wikipedia/commons/4/43/Chess_Ndt45.svg",
     white: "https://upload.wikimedia.org/wikipedia/commons/1/17/Chess_Nlt45.svg"
 }
-pawn = {
+const pawn = {
     black: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Chess_hdt45.svg",
     white: "https://upload.wikimedia.org/wikipedia/commons/0/08/Chess_hlt45.svg"
 }
@@ -2036,19 +2036,19 @@ function movePiece(move) {
             document.querySelector('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]).innerHTML = "";
             document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = piece;
             protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
-            if (move[1][1] == "8" || move[1][1] == "1" && pawnMove) {
+            if ((move[1][1] == "8" || move[1][1] == "1") && pawnMove) {
                 switch (move[1][0]) {
                     default: // case Q
-                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${queen[move[1][0]]}" alt="Q">`
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${queen[player]}" alt="Q">`
                         break;
                     case "R":
-                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${rook[move[1][0]]}" alt="R">`
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${rook[player]}" alt="R">`
                         break;
                     case "B":
-                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${bishop[move[1][0]]}" alt="B">`
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${bishop[player]}" alt="B">`
                         break;
                     case "N":
-                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${knight[move[1][0]]}" alt="N">`
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${knight[player]}" alt="N">`
                         break;
                 }
             } else if (pawnMove && moveInfo.flags === "e") {
