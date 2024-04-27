@@ -5,3 +5,5 @@ headingBtns.forEach(btn => {
         headingBtns.forEach(B => B.className = B === btn ? 'selected' : '');
     });
 });
+
+// document.querySelector('.na-tahu.yes').className = 'na-tahu no'

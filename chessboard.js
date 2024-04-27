@@ -2036,7 +2036,7 @@ function movePiece(move) {
             const piece = document.querySelector('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]).innerHTML;
             document.querySelector('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]).innerHTML = "";
             document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = piece;
-            protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+            if (!gameover) protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
             if ((move[1][1] == "8" || move[1][1] == "1") && pawnMove) {
                 console.log(move[1][move[1].length - 1])
                 switch (move[1][move[1].length - 1]) {
@@ -2074,8 +2074,9 @@ function movePiece(move) {
             } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
                 protocol.textContent = "Stalemate!"
                 gameover = true
+            }else{
+                protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
             }
-            protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
             document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].e`).innerHTML = "";
             if (move === "O-O") {
                 document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].h`).innerHTML = "";

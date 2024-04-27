@@ -1,3 +1,7 @@
+:root{
+    --game-height: 430px
+}
+
 *{
     font-family: sans-serif;
 }
@@ -49,13 +53,12 @@ header svg{
     
 }
 main{
-    margin: 0 10px;
-    background-color: #777;
-    /* height: unset; */
-    padding: 100px 40px 0;
+    margin: 0px 40px;
+    background-color: rgb(119, 119, 119);
+    padding: 50px 40px 0px;
     display: flex;
-    flex-direction: column;
     height: -webkit-fill-available;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -68,8 +71,63 @@ body{
 section.game{
     background-color: black;
     width: fit-content;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10%;
     color: whitesmoke;
 }
 
+section.player-info{
+    height: var(--game-height);
+    width: 225px;
+}
+
+#basic-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#basic-info svg{
+    width: 75px;
+    fill: whitesmoke;
+    height: min-content;
+}
+#basic-info img{
+    width: 75px;
+    height: min-content;
+}
+
+#basic-info input{
+    height: 30px;
+    /* It has to not appear as input */
+    background-color: transparent;
+    border: none;
+    color: whitesmoke;
+    font-size: 30px;
+    max-width: 50%;
+    
+}
+#basic-info input:focus{
+    outline: none;
+}
+
+.na-tahu{
+    background-color: #05008a;
+    color: whitesmoke;
+    padding: 2px 0;
+    text-align: center
+}
+.na-tahu.no{
+    opacity: 0.4;
+}
+
+#piece-gain h4{
+    margin-left: 12px;
+    margin-bottom: 5px;
+}
+
+#piece-gain li{
+    list-style-type: none;
+    margin-top: 5px;
+}
