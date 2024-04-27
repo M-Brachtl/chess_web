@@ -1908,7 +1908,7 @@ exports.Chess = Chess;
 },{}],2:[function(require,module,exports){
 const Chess = require("chess.js").Chess;
 
-let player = "white"; // I'm looking forward to make the black's part of the game. /s
+let player = "white"; // I'm looking forward to make the black's part of the game. /s; ouch
 const chess = new Chess();
 const protocol = document.getElementById("protocol-line")
 let gameover = false;
@@ -1996,10 +1996,11 @@ startPosition();
 function movePiece(move) {
     // communication with the server
     let pawnMove = false
-    if (JSON.stringify(move) == JSON.stringify(['Ke1','g1'])) {
+    const mover = { w: "white", b: "black" }[chess.turn()]
+    if (JSON.stringify(move) == JSON.stringify(['Ke1','g1']) || JSON.stringify(move) == JSON.stringify(['Ke8','g8'])) {
         console.log('Small castling')
         move = 'O-O'
-    }else if (JSON.stringify(move) == JSON.stringify(['Ke1','c1'])  ) {
+    }else if (JSON.stringify(move) == JSON.stringify(['Ke1','c1']) || JSON.stringify(move) == JSON.stringify(['Ke8','c8'])) {
         console.log('Big castling')
         move = 'O-O-O'
     }
@@ -2020,7 +2021,7 @@ function movePiece(move) {
             protocol.textContent = ""
             const moveInfo = chess.move(move[0] + move[1], verbose = true);
             if (chess.isCheckmate()) {
-                protocol.textContent = `Checkmate! ${{ b: "White", w: "Black" }[chess.turn()]} won!`
+                protocol.textContent = `Checkmate! ${mover[0].toUpperCase() + mover.slice(1)} won!` // { b: "White", w: "Black" }[chess.turn()]
                 gameover = true;
             } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
                 protocol.textContent = "Stalemate!"
@@ -2037,23 +2038,24 @@ function movePiece(move) {
             document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = piece;
             protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
             if ((move[1][1] == "8" || move[1][1] == "1") && pawnMove) {
-                switch (move[1][0]) {
-                    default: // case Q
-                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${queen[player]}" alt="Q">`
-                        break;
+                console.log(move[1][move[1].length - 1])
+                switch (move[1][move[1].length - 1]) {
                     case "R":
-                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${rook[player]}" alt="R">`
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${rook[mover]}" alt="R">`
                         break;
                     case "B":
-                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${bishop[player]}" alt="B">`
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${bishop[mover]}" alt="B">`
                         break;
                     case "N":
-                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${knight[player]}" alt="N">`
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${knight[mover]}" alt="N">`
+                        break;
+                    default: // case Q
+                        document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = `<img src="${queen[mover]}" alt="Q">`
                         break;
                 }
             } else if (pawnMove && moveInfo.flags === "e") {
                 console.log('[class^="' + (parseInt(move[1][1])+1) + '"].')
-                if (chess.turn() == "w") { // white is about to move => black just did the en passant
+                if (mover === "black") { // white is about to move => black just did the en passant
                     document.querySelector('[class^="' + (parseInt(move[1][1])+1) + '"].' + move[1][0]).innerHTML = "";
                 } else {
                     document.querySelector('[class^="' + (parseInt(move[1][1])-1) + '"].' + move[1][0]).innerHTML = "";
@@ -2067,22 +2069,22 @@ function movePiece(move) {
         try {
             chess.move(move);
             if (chess.isCheckmate()) {
-                protocol.textContent = `Checkmate! ${{ b: "White", w: "Black" }[chess.turn()]} won!`
+                protocol.textContent = `Checkmate! ${mover[0].toUpperCase()+mover.slice(1)} won!` // the same as before
                 gameover = true;
             } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
                 protocol.textContent = "Stalemate!"
                 gameover = true
             }
             protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
-            document.querySelector("[class^='1'].e").innerHTML = "";
+            document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].e`).innerHTML = "";
             if (move === "O-O") {
-                document.querySelector("[class^='1'].h").innerHTML = "";
-                document.querySelector("[class^='1'].g").innerHTML = `<img src="${king.white}" alt="K">`;
-                document.querySelector("[class^='1'].f").innerHTML = `<img src="${rook.white}" alt="R">`;
+                document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].h`).innerHTML = "";
+                document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].g`).innerHTML = `<img src="${king[mover]}" alt="K">`;
+                document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].f`).innerHTML = `<img src="${rook[mover]}" alt="R">`;
             } else {
-                document.querySelector("[class^='1'].a").innerHTML = "";
-                document.querySelector("[class^='1'].c").innerHTML = `<img src="${king.white}" alt="K">`;
-                document.querySelector("[class^='1'].d").innerHTML = `<img src="${rook.white}" alt="R">`;
+                document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].a`).innerHTML = "";
+                document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].c`).innerHTML = `<img src="${king[mover]}" alt="K">`;
+                document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].d`).innerHTML = `<img src="${rook[mover]}" alt="R">`;
             }
         }
         catch (error) {
