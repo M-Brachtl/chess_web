@@ -2180,10 +2180,15 @@ fields.forEach(function (field) {
     });
 });
 
-document.querySelectorAll(".castle").forEach(function (castle) {
-    castle.addEventListener('click', function () {
-        movePiece(castle.innerHTML);
-    });
+document.querySelectorAll(".castle").forEach(castle => castle.addEventListener('click', () => movePiece(castle.innerHTML)));
+
+document.getElementById("pgn").addEventListener('click', () => {
+    const pgn = chess.pgn();
+    navigator.clipboard.writeText(pgn);
+});
+document.getElementById("fen").addEventListener('click', () => {
+    const fen = chess.fen();
+    navigator.clipboard.writeText(fen);
 });
 
 },{"chess.js":1}]},{},[2]);

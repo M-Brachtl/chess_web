@@ -74,6 +74,7 @@ section.game{
     padding: 30px;
     border-radius: 10%;
     color: whitesmoke;
+    padding-bottom: 12px;
 }
 
 section.player-info{
@@ -130,4 +131,46 @@ section.player-info{
 #piece-gain li{
     list-style-type: none;
     margin-top: 5px;
+}
+.cb-tools{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#protocol-line{
+    margin: 0;
+    text-align: center;
+}
+
+.cb-tools button{
+    padding: 2px 3px 0;
+    background-color: #444;
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.cb-tools button:hover{
+    background-color: #666;
+}
+
+.pgn-fen {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 10px;
+}
+.pgn-fen button{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: whitesmoke;
+}
+.pgn-fen button:hover{
+    color: #666;
+    cursor: pointer;
 }

@@ -46,28 +46,3 @@ img[src="https://upload.wikimedia.org/wikipedia/commons/4/43/Chess_Ndt45.svg"], 
     transform: matrix(-1, 0, 0, 1, 0, 0);
 }
 
-.cb-tools{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#protocol-line{
-    margin: 0;
-    text-align: center;
-}
-
-.cb-tools button{
-    padding: 2px 3px 0;
-    background-color: #444;
-    color: whitesmoke;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: 0.2s;
-}
-
-.cb-tools button:hover{
-    background-color: #666;
-}
