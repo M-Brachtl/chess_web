@@ -1991,6 +1991,35 @@ function startPosition() {
     });
 }
 
+let pieceGain = {
+    w: {
+        P: 0,
+        N: 0,
+        B: 0,
+        R: 0,
+        Q: 0
+    },
+    b: {
+        P: 0,
+        N: 0,
+        B: 0,
+        R: 0,
+        Q: 0
+    }
+}
+function updatePieceGain(pieceGain) {
+    const infoTabW = document.querySelectorAll(".player-info#white #piece-gain ul li");
+    const infoTabB = document.querySelectorAll(".player-info#black #piece-gain ul li");
+
+    infoTabW.forEach(pieceI => {
+        pieceI.querySelector("span").textContent = pieceGain.w[pieceI.querySelector("span").dataset.piece];
+    });
+    infoTabB.forEach(pieceI => {
+        pieceI.querySelector("span").textContent = pieceGain.b[pieceI.querySelector("span").dataset.piece];
+    });
+};
+
+
 startPosition();
 
 function movePiece(move) {
@@ -2032,11 +2061,28 @@ function movePiece(move) {
             }
             // piece moving
             //console.log('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]);
+            if (document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML != "") {
+                const piece = document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).querySelector("img").alt;
+                if (mover === "black") {
+                    pieceGain.b[piece] += 1;
+                } else {
+                    pieceGain.w[piece] += 1;
+                }
+                updatePieceGain(pieceGain);
+            };
+            //switch upcoming player
+            if (chess.turn() === "w") {
+                document.querySelector(".player-info#white .na-tahu").classList.remove("no")
+                document.querySelector(".player-info#black .na-tahu").classList.add("no")
+            } else {
+                document.querySelector(".player-info#black .na-tahu").classList.remove("no")
+                document.querySelector(".player-info#white .na-tahu").classList.add("no")
+            }
 
             const piece = document.querySelector('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]).innerHTML;
             document.querySelector('[class^="' + move[0][move.length] + '"].' + move[0][move.length - 1]).innerHTML = "";
             document.querySelector('[class^="' + move[1][1] + '"].' + move[1][0]).innerHTML = piece;
-            if (!gameover) protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+            //if (!gameover) protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
             if ((move[1][1] == "8" || move[1][1] == "1") && pawnMove) {
                 console.log(move[1][move[1].length - 1])
                 switch (move[1][move[1].length - 1]) {
@@ -2057,8 +2103,12 @@ function movePiece(move) {
                 console.log('[class^="' + (parseInt(move[1][1])+1) + '"].')
                 if (mover === "black") { // white is about to move => black just did the en passant
                     document.querySelector('[class^="' + (parseInt(move[1][1])+1) + '"].' + move[1][0]).innerHTML = "";
+                    pieceGain.b.P += 1;
+                    updatePieceGain(pieceGain);
                 } else {
                     document.querySelector('[class^="' + (parseInt(move[1][1])-1) + '"].' + move[1][0]).innerHTML = "";
+                    pieceGain.w.P += 1;
+                    updatePieceGain(pieceGain);
                 }
             }
         }
@@ -2075,7 +2125,7 @@ function movePiece(move) {
                 protocol.textContent = "Stalemate!"
                 gameover = true
             }else{
-                protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+                //protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
             }
             document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].e`).innerHTML = "";
             if (move === "O-O") {
