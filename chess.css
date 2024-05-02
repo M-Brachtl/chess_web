@@ -13,6 +13,13 @@
     background-color: #e8e8e8;
 }
 
+.chessboard.blackview {
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+.chessboard.blackview div img{
+    transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
 .chessboard .\031.a, .\033.a, .\035.a, .\037.a,
 .chessboard .\031.c, .\033.c, .\035.c, .\037.c,
 .chessboard .\031.e, .\033.e, .\035.e, .\037.e,

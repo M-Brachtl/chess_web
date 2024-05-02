@@ -1907,10 +1907,10 @@ exports.Chess = Chess;
 
 },{}],2:[function(require,module,exports){
 const Chess = require("chess.js").Chess;
-
-let player = "white"; // I'm looking forward to make the black's part of the game. /s; ouch
-const chess = new Chess();
 const protocol = document.getElementById("protocol-line")
+
+const player = window.location.hash === "#black" ? "black" : "white";
+const chess = new Chess();
 let gameover = false;
 
 const fields = document.querySelectorAll(".chessboard div");
