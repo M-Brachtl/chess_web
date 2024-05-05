@@ -2032,6 +2032,8 @@ async function aiMove(depth) {
     console.log(move)
     movePiece(move, true)
 }
+if (player === "black") aiMove(depth);
+
 function movePiece(move, ai=false) {
     let pawnMove = false
     const mover = { w: "white", b: "black" }[chess.turn()]
@@ -2056,6 +2058,7 @@ function movePiece(move, ai=false) {
             }
         }
         try {
+            console.log(protocol)
             protocol.textContent = ""
             const moveInfo = chess.move(move[0] + move[1], verbose = true);
             if (chess.isCheckmate()) {
@@ -2064,6 +2067,10 @@ function movePiece(move, ai=false) {
             } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
                 protocol.textContent = "Stalemate!"
                 gameover = true
+            } else if (window.innerWidth <= 880) {
+                protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+            } else {
+                console.log(window.innerWidth)
             }
             if (pawnMove) {
                 move[0] = "P" + move[0]
@@ -2136,8 +2143,10 @@ function movePiece(move, ai=false) {
             } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
                 protocol.textContent = "Stalemate!"
                 gameover = true
-            }else{
-                //protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+            } else if (window.innerWidth <= 880) {
+                protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+            } else {
+                console.log(window.innerWidth)
             }
             //switch upcoming player
             if (chess.turn() === "w") {
