@@ -53,10 +53,8 @@ header svg{
     
 }
 main{
-    margin: 0px 40px;
+    padding: 15px 40px 0px;
     background-color: rgb(119, 119, 119);
-    padding: 50px 40px 0px;
-    height: -webkit-fill-available;
 }
 
 #page1{
@@ -66,9 +64,16 @@ main{
 }
 
 body{
-    margin-bottom: 0;
-    height: calc(100vh - 8px); /* 8px is the default margin-top of body */
+    margin: 80px 40px 0px;
+    /* background-color: #333; */
+    background-color: rgb(119, 119, 119);
+    height: -webkit-fill-available;
+}
+
+html{
+    scroll-behavior: smooth;
     background-color: #333;
+    height: 100%;
 }
 
 section.game{
