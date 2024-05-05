@@ -2021,9 +2021,18 @@ function updatePieceGain(pieceGain) {
 
 
 startPosition();
+let depth = 1;
 
-function movePiece(move) {
-    // communication with the server
+async function aiMove(depth) {
+    const response = await fetch(`https://stockfish.online/api/s/v2.php?fen=${chess.fen()}&depth=${depth}`);
+    const data = await response.json();
+    move = [data.bestmove.slice(9,11),data.bestmove.slice(11,13)]
+    // now to find out which piece is moving
+    move[0] = document.querySelector('[class^="' + move[0][move.length-1] + '"].' + move[0][move.length - 2] + ' img').alt + move[0];
+    console.log(move)
+    movePiece(move, true)
+}
+function movePiece(move, ai=false) {
     let pawnMove = false
     const mover = { w: "white", b: "black" }[chess.turn()]
     if (JSON.stringify(move) == JSON.stringify(['Ke1','g1']) || JSON.stringify(move) == JSON.stringify(['Ke8','g8'])) {
@@ -2111,6 +2120,9 @@ function movePiece(move) {
                     updatePieceGain(pieceGain);
                 }
             }
+            if (!ai && !gameover) {
+                aiMove(depth)
+            };
         }
         catch (error) {
             protocol.textContent = error.message;
@@ -2127,6 +2139,14 @@ function movePiece(move) {
             }else{
                 //protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
             }
+            //switch upcoming player
+            if (chess.turn() === "w") {
+                document.querySelector(".player-info#white .na-tahu").classList.remove("no")
+                document.querySelector(".player-info#black .na-tahu").classList.add("no")
+            } else {
+                document.querySelector(".player-info#black .na-tahu").classList.remove("no")
+                document.querySelector(".player-info#white .na-tahu").classList.add("no")
+            }
             document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].e`).innerHTML = "";
             if (move === "O-O") {
                 document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].h`).innerHTML = "";
@@ -2137,6 +2157,9 @@ function movePiece(move) {
                 document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].c`).innerHTML = `<img src="${king[mover]}" alt="K">`;
                 document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].d`).innerHTML = `<img src="${rook[mover]}" alt="R">`;
             }
+            if (!ai && !gameover) {
+                aiMove(depth)
+            };
         }
         catch (error) {
             protocol.textContent = error.message;
