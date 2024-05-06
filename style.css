@@ -64,16 +64,19 @@ main{
 }
 
 body{
+    text-align: center;
     margin: 80px 40px 0px;
     /* background-color: #333; */
     background-color: rgb(119, 119, 119);
     height: -webkit-fill-available;
+    overflow: auto;
 }
 
 html{
     scroll-behavior: smooth;
     background-color: #333;
     height: 100%;
+    overflow: auto;
 }
 
 section.game{

@@ -48,4 +48,23 @@
         color: transparent;
         fill: transparent;
     }
+    main {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 470px){
+    section.game{
+        padding: 15px;
+        border-radius: 1%;
+    }
+}
+
+/* 440px */
+@media (max-width: 440px){
+    .chessboard div {
+        width: 40px;
+        height: 40px;
+    }
 }
