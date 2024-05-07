@@ -1032,10 +1032,10 @@ class Chess {
         // failed to find move
         if (!moveObj) {
             if (typeof move === 'string') {
-                throw new Error(`Invalid move: ${move}`);
+                throw new Error(`Neplatný tah: ${move}`);
             }
             else {
-                throw new Error(`Invalid move: ${JSON.stringify(move)}`);
+                throw new Error(`Neplatný tah: ${JSON.stringify(move)}`);
             }
         }
         /*
@@ -1909,7 +1909,12 @@ exports.Chess = Chess;
 const Chess = require("chess.js").Chess;
 const protocol = document.getElementById("protocol-line")
 
-const player = window.location.hash === "#black" ? "black" : "white";
+const newGameData = window.location.hash.slice(1).split('-')
+const depth = parseInt(newGameData[1])
+const aiOn = Boolean(parseInt(newGameData[2]))
+console.log(newGameData)
+console.log(aiOn)
+const player = newGameData[0] === "black" ? "black" : "white";
 const chess = new Chess();
 let gameover = false;
 
@@ -2021,18 +2026,19 @@ function updatePieceGain(pieceGain) {
 
 
 startPosition();
-let depth = 1;
 
-async function aiMove(depth) {
-    const response = await fetch(`https://stockfish.online/api/s/v2.php?fen=${chess.fen()}&depth=${depth}`);
-    const data = await response.json();
-    move = [data.bestmove.slice(9,11),data.bestmove.slice(11,13)]
-    // now to find out which piece is moving
-    move[0] = document.querySelector('[class^="' + move[0][move.length-1] + '"].' + move[0][move.length - 2] + ' img').alt + move[0];
-    console.log(move)
-    movePiece(move, true)
+async function aiMove(depth,aiOn=true) {
+    if (aiOn){
+        const response = await fetch(`https://stockfish.online/api/s/v2.php?fen=${chess.fen()}&depth=${depth}`);
+        const data = await response.json();
+        move = [data.bestmove.slice(9,11),data.bestmove.slice(11,13)]
+        // now to find out which piece is moving
+        move[0] = document.querySelector('[class^="' + move[0][move.length-1] + '"].' + move[0][move.length - 2] + ' img').alt + move[0];
+        console.log(move)
+        movePiece(move, true)
+    }
 }
-if (player === "black") aiMove(depth);
+if (player === "black") aiMove(depth,aiOn);
 
 function movePiece(move, ai=false) {
     let pawnMove = false
@@ -2062,13 +2068,13 @@ function movePiece(move, ai=false) {
             protocol.textContent = ""
             const moveInfo = chess.move(move[0] + move[1], verbose = true);
             if (chess.isCheckmate()) {
-                protocol.textContent = `Checkmate! ${mover[0].toUpperCase() + mover.slice(1)} won!` // { b: "White", w: "Black" }[chess.turn()]
+                protocol.textContent = `Šach mat! ${{ b: "Bílý", w: "Černý" }[chess.turn()]} vyhrál!` // ${mover[0].toUpperCase() + mover.slice(1)}
                 gameover = true;
             } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
-                protocol.textContent = "Stalemate!"
+                protocol.textContent = "Remíza!"
                 gameover = true
             } else if (window.innerWidth <= 880) {
-                protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+                protocol.textContent = { w: "Bílý", b: "Černý" }[chess.turn()] + " na tahu";
             } else {
                 console.log(window.innerWidth)
             }
@@ -2128,7 +2134,7 @@ function movePiece(move, ai=false) {
                 }
             }
             if (!ai && !gameover) {
-                aiMove(depth)
+                aiMove(depth,aiOn)
             };
         }
         catch (error) {
@@ -2138,13 +2144,13 @@ function movePiece(move, ai=false) {
         try {
             chess.move(move);
             if (chess.isCheckmate()) {
-                protocol.textContent = `Checkmate! ${mover[0].toUpperCase()+mover.slice(1)} won!` // the same as before
+                protocol.textContent = `Šach mat! ${{ b: "Bílý", w: "Černý" }[chess.turn()]} vyhrál!` // the same as before
                 gameover = true;
             } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
-                protocol.textContent = "Stalemate!"
+                protocol.textContent = "Remíza!"
                 gameover = true
             } else if (window.innerWidth <= 880) {
-                protocol.textContent = { w: "White", b: "Black" }[chess.turn()] + " to move";
+                protocol.textContent = { w: "Bílý", b: "Černý" }[chess.turn()] + " na tahu";
             } else {
                 console.log(window.innerWidth)
             }
@@ -2167,7 +2173,7 @@ function movePiece(move, ai=false) {
                 document.querySelector(`[class^='${{black: 8,white: 1}[mover]}'].d`).innerHTML = `<img src="${rook[mover]}" alt="R">`;
             }
             if (!ai && !gameover) {
-                aiMove(depth)
+                aiMove(depth,aiOn)
             };
         }
         catch (error) {
