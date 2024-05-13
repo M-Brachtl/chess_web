@@ -1911,8 +1911,8 @@ const protocol = document.getElementById("protocol-line")
 
 const newGameData = window.location.hash.slice(1).split('-')
 const depth = parseInt(newGameData[1])
-const aiOn = Boolean(parseInt(newGameData[2]))
-console.log(newGameData)
+const aiOn = newGameData[2] === 'true';
+console.log(newGameData);
 console.log(aiOn)
 const player = newGameData[0] === "black" ? "black" : "white";
 const chess = new Chess();
