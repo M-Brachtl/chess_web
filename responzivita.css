@@ -68,3 +68,10 @@
         height: 40px;
     }
 }
+
+@media (max-width: 700px){
+    #credits-footer.opened{
+        flex-direction: column;
+        top: 88px ;
+    }
+}

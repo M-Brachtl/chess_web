@@ -206,3 +206,47 @@ a{
 #piece-gain{
     text-align: left;
 }
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #353535;
+    color: whitesmoke;
+    width: 100%;
+    /* font-size: 20px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 100;
+}
+
+footer p{
+    margin: 5px;
+}
+
+footer a{
+    color: whitesmoke;
+    /* text-decoration: none; */
+}
+
+#credits-footer{
+    bottom: -280.4px;
+    z-index: 99;
+}
+#credits-footer.opened{
+    bottom: 28.4px;
+}
+
+footer button{
+    padding: 10px 20px;
+    background-color: #333;
+    color: whitesmoke;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.5s;
+}
+footer button:hover{
+    background-color: #555;
+}

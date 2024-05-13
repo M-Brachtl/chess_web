@@ -17,3 +17,10 @@ if (window.location.hash.split('-')[0] === "#black") {
 }else{
     protocol.style.setProperty("margin-right", "20px", "important");
 }
+
+function creditsShow() {
+    document.getElementById("credits-footer").classList.add("opened");
+}
+function creditsHide() {
+    document.getElementById("credits-footer").classList.remove("opened");
+}
