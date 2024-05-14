@@ -231,11 +231,12 @@ footer a{
 }
 
 #credits-footer{
-    bottom: -280.4px;
+    bottom: -280px;
     z-index: 99;
+    transition: 0.5s;
 }
 #credits-footer.opened{
-    bottom: 28.4px;
+    bottom: 28px;
 }
 
 footer button{

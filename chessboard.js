@@ -2182,7 +2182,7 @@ function movePiece(move, ai=false) {
     };
     console.log(chess.ascii())
 }
-
+let chosen = [null,null];
 function fromClick(field) {
     console.log("CLick")
     if (pieceClicked && !gameover) {
@@ -2192,6 +2192,9 @@ function fromClick(field) {
         // the piece
         console.log(field)
         move[0] = field.children[0].alt + field.classList[1] + field.classList[0];
+        chosen = [field,field.style.backgroundColor];
+        field.style.backgroundColor = "#c8c8ff";
+        console.log(field);
     }
 }
 
@@ -2210,6 +2213,8 @@ function toClick(field) {
         movePiece(move);
         move = [null, null];
     };
+    chosen[0].style.backgroundColor = chosen[1];
+    chosen = [null,null];
 };
 
 fields.forEach(function (field) {
