@@ -1912,9 +1912,10 @@ const protocol = document.getElementById("protocol-line")
 const newGameData = window.location.hash.slice(1).split('-')
 const depth = parseInt(newGameData[1])
 const aiOn = newGameData[2] === 'true';
-console.log(newGameData);
-console.log(aiOn)
 const player = newGameData[0] === "black" ? "black" : "white";
+
+document.querySelector('#white #basic-info input').value = decodeURI(newGameData[3]);
+document.querySelector('#black #basic-info input').value = decodeURI(newGameData[4]);
 const chess = new Chess();
 let gameover = false;
 

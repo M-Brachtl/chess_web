@@ -25,3 +25,15 @@ function creditsShow() {
 function creditsHide() {
     document.getElementById("credits-footer").classList.remove("opened");
 }
+
+function newGame() {
+    const aiButtons = document.querySelectorAll('input[type="checkbox"]');
+    const colour = aiButtons[0].checked && !aiButtons[1].checked ? "black" : "white";
+    const aiOn = aiButtons[0].checked || aiButtons[1].checked;
+    const difficulty = document.getElementById("difficulty-value").textContent;
+    let names = [document.querySelector('#player1 input').value, document.querySelector('#player2 input').value];
+    if (aiButtons[0].checked && names[0] === "Hráč 1") names[0] = "AI";
+    if (aiButtons[1].checked && names[1] === "Hráč 2") names[1] = "AI";
+
+    location.href = `game.html#${colour}-${difficulty}-${aiOn}-${names[0]}-${names[1]}`;
+}

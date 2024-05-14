@@ -18,10 +18,29 @@
             <button id="howto"><a href="./tutorial.html">Jak hrát?</a></button>
         </div>
     </header>
-    <main id="page2">
-        <h1>Ups, zatím tu nic není!</h1>
-        <p>Prozatím tu není nic k vidění. Ale nezoufej, můžeš si třeba něco <a href="./game.html">zahrát</a>.</p>
-        <p>Nebo se chceš podívat na <a href="https://github.com/M-Brachtl/chess_web">GitHub</a>?</p>
+    <main id="pageI">
+        <section class="new game">
+            <h2>Nová hra</h2>
+            <div id="new-game">
+                <div id="player1" class="new-game-parts">
+                    Jméno bílého:
+                    <input type="text" value="Hráč 1">
+                    AI: <input type="checkbox" class="aiChBox">
+                </div>
+                <div id="player2" class="new-game-parts">
+                    Jméno černého:
+                    <input type="text" value="Hráč 2">
+                    AI: <input type="checkbox" class="aiChBox">
+                </div>
+                <div id="difficulty" class="new-game-parts">
+                    Obtížnost AI:
+                    <!-- moving button -->
+                    <input type="range" min="1" max="5" value="3" oninput="document.getElementById('difficulty-value').textContent = value">
+                    <span id="difficulty-value">3</span>
+                </div>
+                <button onclick="newGame()">Začít hru</button>
+            </form>
+        </section>
     </main>
     <footer>
         <!-- kontaktní info, credits -->
