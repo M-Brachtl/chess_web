@@ -1916,7 +1916,7 @@ console.log(aiOn)
 const player = newGameData[0] === "black" ? "black" : "white";
 
 document.querySelector('#white #basic-info input').value = decodeURI(newGameData[3]) !== "undefined" ? decodeURI(newGameData[3]) : "Hráč"
-document.querySelector('#black #basic-info input').value = decodeURI(newGameData[4]) !== "undefined" ? decodeURI(newGameData[3]) : "AI"
+document.querySelector('#black #basic-info input').value = decodeURI(newGameData[4]) !== "undefined" ? decodeURI(newGameData[4]) : "AI"
 const chess = new Chess();
 let gameover = false;
 
