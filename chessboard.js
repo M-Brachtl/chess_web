@@ -1910,12 +1910,13 @@ const Chess = require("chess.js").Chess;
 const protocol = document.getElementById("protocol-line")
 
 const newGameData = window.location.hash.slice(1).split('-')
-const depth = parseInt(newGameData[1])
-const aiOn = newGameData[2] === 'true';
+const depth = parseInt(newGameData[1]) || 3; // first element if true, else second element
+const aiOn = !(newGameData[2] === 'false');
+console.log(aiOn)
 const player = newGameData[0] === "black" ? "black" : "white";
 
-document.querySelector('#white #basic-info input').value = decodeURI(newGameData[3]);
-document.querySelector('#black #basic-info input').value = decodeURI(newGameData[4]);
+document.querySelector('#white #basic-info input').value = decodeURI(newGameData[3]) !== "undefined" ? decodeURI(newGameData[3]) : "Hráč"
+document.querySelector('#black #basic-info input').value = decodeURI(newGameData[4]) !== "undefined" ? decodeURI(newGameData[3]) : "AI"
 const chess = new Chess();
 let gameover = false;
 
@@ -2032,24 +2033,29 @@ async function aiMove(depth,aiOn=true) {
     if (aiOn){
         const response = await fetch(`https://stockfish.online/api/s/v2.php?fen=${chess.fen()}&depth=${depth}`);
         const data = await response.json();
-        move = [data.bestmove.slice(9,11),data.bestmove.slice(11,13)]
+        try {
+            move = [data.bestmove.slice(9,11),data.bestmove.slice(11,13)];
+        } catch (error) {
+            console.log(data);
+            alert("AI Internal Error, this is not my fault");
+        }
         // now to find out which piece is moving
         move[0] = document.querySelector('[class^="' + move[0][move.length-1] + '"].' + move[0][move.length - 2] + ' img').alt + move[0];
-        console.log(move)
-        movePiece(move, true)
+        console.log(move);
+        movePiece(move, true);
     }
 }
 if (player === "black") aiMove(depth,aiOn);
 
 function movePiece(move, ai=false) {
-    let pawnMove = false
-    const mover = { w: "white", b: "black" }[chess.turn()]
+    let pawnMove = false;
+    const mover = { w: "white", b: "black" }[chess.turn()];
     if (JSON.stringify(move) == JSON.stringify(['Ke1','g1']) || JSON.stringify(move) == JSON.stringify(['Ke8','g8'])) {
-        console.log('Small castling')
-        move = 'O-O'
+        console.log('Small castling');
+        move = 'O-O';
     }else if (JSON.stringify(move) == JSON.stringify(['Ke1','c1']) || JSON.stringify(move) == JSON.stringify(['Ke8','c8'])) {
-        console.log('Big castling')
-        move = 'O-O-O'
+        console.log('Big castling');
+        move = 'O-O-O';
     }
     console.log('Move: '+ move)
     if (!gameover && move !== "O-O" && move !== "O-O-O") {
@@ -2058,7 +2064,12 @@ function movePiece(move, ai=false) {
             if (move[1][1] == "8" || move[1][1] == "1") {
                 move[0] = move[0].slice(1)
                 pawnMove = true
-                move[1] += '='+prompt("Promote to: (Q, R, B, N)").toUpperCase()
+                const promote = prompt("Promote to: (Q, R, B, N)")
+                if (promote) {
+                    move[1] += '='+prompt("Promote to: (Q, R, B, N)").toUpperCase()
+                } else {
+                    move[1] += "invalid"
+                }
             }else{
                 move[0] = move[0].slice(1)
                 pawnMove = true
