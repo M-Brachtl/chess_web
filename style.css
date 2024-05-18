@@ -53,8 +53,9 @@ header svg{
     
 }
 main{
-    padding: 15px 40px 0px;
+    padding: 15px 40px 10px;
     background-color: rgb(119, 119, 119);
+    margin-bottom: 28.4px;
 }
 
 #page1{
@@ -319,5 +320,51 @@ input[type="checkbox"]:checked{
 #pageI{
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 20px;
+}
+
+/* index html */
+#pageI img{
+    max-height: 79vh;
+    margin-bottom: 40px;
+}
+
+section#text h1{
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+section#text p{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+section#text h2{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+section#text{
+    width: 80%;
+}
+
+section#uvod-obsah{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#obsah ul{
+    text-align: left;
+    font-size: 20px;
+}
+#obsah a{
+    color: black;
+    text-decoration: none;
+}
+#obsah a:hover{
+    color: #333;
+}
+#obsah li{
+    margin: 10px 0;
+}
+#obsah{
+    margin-right: 20px;
 }
