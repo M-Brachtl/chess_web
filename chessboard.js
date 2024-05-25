@@ -2064,11 +2064,13 @@ function movePiece(move, ai=false) {
             if (move[1][1] == "8" || move[1][1] == "1") {
                 move[0] = move[0].slice(1)
                 pawnMove = true
-                const promote = prompt("Promote to: (Q, R, B, N)")
-                if (promote) {
-                    move[1] += '='+prompt("Promote to: (Q, R, B, N)").toUpperCase()
-                } else {
-                    move[1] += "invalid"
+                if (!ai) {
+                    const promote = prompt("Promote to: (Q, R, B, N)")
+                    if (promote && !ai) {
+                        move[1] += '='+promote.toUpperCase()
+                    } else {
+                        move[1] += "invalid"
+                    }
                 }
             }else{
                 move[0] = move[0].slice(1)
