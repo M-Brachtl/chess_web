@@ -19,9 +19,63 @@
         </div>
     </header>
     <main id="page2">
-        <h1>Ups, zatím tu nic není!</h1>
-        <p>Prozatím tu není nic k vidění. Ale nezoufej, můžeš si třeba něco <a href="./game.html">zahrát</a>.</p>
-        
+        <h1>Tutoriál</h1>
+        <h2>Obsah</h2>
+        <ul>
+            <li><a href="#navigace">Navigační tlačítka</a></li>
+            <li><a href="#newgame">Nová hra</a></li>
+            <li><a href="#pohyby">Pohyb figurkou</a></li>
+            <li><a href="#sachmat">Šachmat</a></li>
+            <li><a href="#remiza">Remíza</a></li>
+            <li><a href="#video">Tutoriálové video</a></li>
+        </ul>
+
+        <h2 id="navigace">Navigační tlačítka</h2>
+        <p>V horní liště se nachází tři tlačítka: Domů, Hrát a Jak hrát. Na stránce 'Jak hrát' se právě nacházíte.</p>
+        <ul>
+            <li>Tlačítko Domů vás přesměruje na úvodní stránku popisem stránky a nastavením pro novou hru.</li>
+            <li>Tlačítko Hrát vás přesměruje na stránku, kde si můžete zahrát šachy. Hra bude nastavena na hru za bílého proti počítači o úrovni 3.</li>
+            <li>Tlačítko Jak hrát vás přesměruje na tuto stránku.</li>
+        </ul>
+
+        <h2 id="newgame">Nová hra</h2>
+        <p>Na stránce domů úplně dole se nachází nastavení pro novou hru.</p>
+        <p>Máte zde možnost si nastavit jména pro bílého a černého (v tomto pořadí) a možnost si zvolit, zda-li za černého, bílého či za nikoho bude hrát počítač.</p>
+        <p><b>Zaškrtnutí boxu 'AI' u obou hráčů má za následek Vaši hru proti počítači. Vy budete hrát za bílého.</b></p>
+        <p>Dále máte možnost nastavit obtížnost AI soupeře na stupnici od 1 do 5. <b>Ve skutečnosti na obtížnosti nezáleží, ve všech pěti případech je velmi silný.</b> Mění se pouze hloubka analýzy situace, která je ale vždy velmi dobrá.</p>
+
+        <h2 id="pohyby">Pohyb figurkou</h2>
+        <p>Pohyb figurkou je velmi jednoduchý. Stačí kliknout na figurku, kterou chcete pohnout, a poté na políčko, kam chcete figurku přesunout.</p>
+        <p>Figurka se pohne na políčko, pokud je tah legální. Pokud není, figurka se nepohne a ilegalita tahu Vám bude oznámena.</p>
+        <p>Políčko s vybranou figurkou se zabarví světle modře.</p>
+        <p>Nelze tah provést táhnutím myší.</p>
+        <p>Rošádu lze zahrát dvojím způsobem: buď využitím speciálních tlačítek k tomu určených (jedná se o tlačítka s nápisy O-O a O-O-O), nebo táhnutím krále způsobem, jaký by odpovídal začátku rošády, tj. o dvě pole směrem k věži.</p>
+        <p>Povýšení pěšce je jednoduché. Zahrajete tah pěšcem na poslední řadu a poté si vyberete, na jakou figuru chcete pěšce povýšit.</p>
+        <p>Výběr figurky probíhá ve vyskakovacím okně prohlížeče, do kterého napíšete anglickou značku figurky. Zde je návod:
+        <ul>
+            <li>Q - dáma</li>
+            <li>R - věž</li>
+            <li>B - střelec</li>
+            <li>N - jezdec</li>
+        </ul></p>
+        <p>Pokud napíšete neplatnou značku, dojde automaticky k povýšení na dámu.</p>
+
+        <h2 id="sachmat">Šachmat</h2>
+        <p>V případě nastalého šachmatu Vám o této situace dá informaci hra sama. V tuto chvíli jsou jakékoli tahy zablokované.</p>
+
+        <h2 id="remiza">Remíza</h2>
+        <p>Remíza je možná v několika případech:</p>
+        <ul>
+            <li>Pat - situace, kdy hráč nemá žádný legální tah, ale jeho král není v šachu.</li>
+            <li>Nedostatek materiálu - situace, kdy žádný z hráčů nemá dostatečný materiál k matování soupeře.</li>
+            <li>Trojí opakování pozice - situace, kdy se stejná pozice opakuje třikrát.</li>
+            <li>Pravidlo 50 tahů - situace, kdy se neudělí žádný pěšcový tah nebo nedojde k braní figury za posledních padesát tahů.</li>
+        </ul>
+        <p><b>Na této stránce v případě trojího opakování tahu dojde k ukončení hry a remíze automaticky.</b></p>
+
+        <h2 id="video">Tutoriálové video</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/SAFfHi4dasI?si=WgpKFhrwXWgSOhAj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
         <h2>Když už to čteš až sem, tady máš něco za odměnu:</h2>
         <img src="https://pbs.twimg.com/media/E43JZXaXwAEjhzf.png" id="temporary-meme">
     </main>

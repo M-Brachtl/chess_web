@@ -2084,9 +2084,13 @@ function movePiece(move, ai=false) {
             if (chess.isCheckmate()) {
                 protocol.textContent = `Šach mat! ${{ b: "Bílý", w: "Černý" }[chess.turn()]} vyhrál!` // ${mover[0].toUpperCase() + mover.slice(1)}
                 gameover = true;
-            } else if (chess.isStalemate() || chess.isDraw() || chess.isInsufficientMaterial() || chess.isThreefoldRepetition()) {
-                protocol.textContent = "Remíza!"
-                gameover = true
+            } else if (chess.isDraw() || chess.isThreefoldRepetition()) {
+                try {
+                    protocol.textContent = "Remíza - " + ["pat", "nedostatek materiálu", "trojí opakování pozice"][[chess.isStalemate(), chess.isInsufficientMaterial(), chess.isThreefoldRepetition()].indexOf(true)];
+                } catch (error) {
+                    protocol.textContent = "Remíza - pravidlo 50 tahů";
+                }
+                gameover = true;
             } else if (window.innerWidth <= 880) {
                 protocol.textContent = { w: "Bílý", b: "Černý" }[chess.turn()] + " na tahu";
             } else {
