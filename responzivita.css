@@ -80,4 +80,15 @@
     iframe{
         display: none;
     }
+    #video-link{
+        display: block !important;
+    }
+}
+
+@media (max-width: 400px){
+    .new.game{
+        width: 100vw;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
