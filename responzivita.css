@@ -32,7 +32,7 @@
     }
 }
 
-@media (max-width: 740px){
+@media (max-width: 855px){
     #heading-buttons{
         right: 130px;
         left: unset;
@@ -73,5 +73,11 @@
     #credits-footer.opened{
         flex-direction: column;
         top: 88px ;
+    }
+}
+
+@media (max-width: 790px){
+    iframe{
+        display: none;
     }
 }
