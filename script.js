@@ -13,8 +13,8 @@ if (window.location.hash.split('-')[0] === "#black") {
     document.querySelectorAll(".cb-tools button")[1].textContent = "O-O-O"
     const protocol = document.getElementById("protocol-line");
     protocol.style.setProperty("margin-left", "20px", "important");
-    document.querySelector(".player-info#white div input").value = "AI"
-    document.querySelector(".player-info#black div input").value = "Hráč"
+    // document.querySelector(".player-info#white div input").value = "AI"
+    // document.querySelector(".player-info#black div input").value = "Hráč"
 }else{
     protocol.style.setProperty("margin-right", "20px", "important");
 }
