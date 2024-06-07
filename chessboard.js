@@ -2067,11 +2067,12 @@ function movePiece(move, ai=false) {
                 move[0] = move[0].slice(1)
                 pawnMove = true
                 if (!ai) {
-                    const promote = prompt("Promote to: (Q, R, B, N)")
+                    let promote = prompt("Povýšit na: (Q, R, B, N)")
+                    if (!("QRBN".includes(promote.toUpperCase()))) promote = "Q";
                     if (promote && !ai) {
                         move[1] += '='+promote.toUpperCase()
                     } else {
-                        move[1] += "invalid"
+                        move = ["Neexistující ", "figura"]
                     }
                 }
             }else{
