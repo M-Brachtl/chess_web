@@ -2036,7 +2036,8 @@ async function aiMove(depth,aiOn=true) {
         const response = await fetch(`https://stockfish.online/api/s/v2.php?fen=${chess.fen()}&depth=${depth}`);
         const data = await response.json();
         try {
-            move = [data.bestmove.slice(9,11),data.bestmove.slice(11,13)];
+            move = [data.bestmove.slice(9,11),data.bestmove.slice(11,14)];
+            if (move[1][move[1].length-1] === " ") move[1] = move[1].slice(0,-1);
         } catch (error) {
             console.log(data);
             alert("AI Internal Error, this is not my fault");
